@@ -6,7 +6,7 @@ extern struct st *hptr;
 void modify()
 {
 	char op;
-	struct st *ptr=hptr;
+	struct st *ptr=hptr ,*temp;
 	printf("\n\n\n");
 //	printf("\t**enter which record to search for**\n");
 	printf("\t*--------------------------------------*\n");
@@ -21,7 +21,8 @@ void modify()
 
 	if((op=='R')||(op=='r'))
 	{
-		int roll_no;
+		int roll_no,count=0;
+	Zoro:
 		printf("\n\tEnter the roll_no...");
 		scanf("%d",&roll_no);
 		printf("\n");
@@ -32,10 +33,7 @@ void modify()
 				modify_data(ptr);
 				return;
 			}
-			else
-			{
-				ptr=ptr->next;
-			}
+			ptr=ptr->next;	
 		}
 	}
 	else if((op=='N')||(op=='n'))
@@ -48,14 +46,27 @@ void modify()
 		{
 			if(strcmp(ptr->name,s)==0)
 			{
-				modify_data(ptr);
-				return;
+				count++;
+				temp=ptr;
 			}
-			else
+			ptr=ptr->next;
+		}ptr=hptr;
+		if(count>1)
+		{
+			printf("\n\tThe given name occurs more than once in the list...");
+			while(ptr!=0)
 			{
+				if(strcmp(ptr->name,s)==0)
+				{
+					printf("\n\t%d\t%[^\n]\t%f",ptr->roll,ptr->name,ptr->mark);
+				}
 				ptr=ptr->next;
 			}
+			goto Zoro;
 		}
+		else
+			modify_data(temp);
+		
 	}
 	else
 	{
