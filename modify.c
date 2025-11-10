@@ -23,6 +23,7 @@ void modify()
 	{
 		int roll_no,count=0;
 	Zoro:
+		ptr=hptr;
 		printf("\n\tEnter the roll_no...");
 		scanf("%d",&roll_no);
 		printf("\n");
@@ -65,7 +66,10 @@ void modify()
 			goto Zoro;
 		}
 		else
+		{
 			modify_data(temp);
+			return;
+		}
 		
 	}
 	else
